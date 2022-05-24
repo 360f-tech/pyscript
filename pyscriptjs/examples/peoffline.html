@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>PyScript Hello World</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="../build/pyscript.css" />
+    
+    <script defer src="../build/pyscript.js"></script>
+    <py-env>
+- numpy
+- xlcalculator
+- ./yearfrac-0.4.4-py3-none-any.whl
+- paths:
+    - ./Singleton.py
+    - ./PremiumEngine.py
+    - ./WOL.json
+    </py-env>
+  </head>
+
+  <body>
+    Hello world! <br>
+    This is the current date and time, as computed by Python:
+    <py-script>
+
+from datetime import datetime
+from PremiumEngine import PremiumCalculator
+
+datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+
+proposal = {"baseCoverage": {"policyStartDate": "05/01/1999","productId": "WOL","productVersion": "1","sumInsured": 600000,"initialPremium": 20000,"discount": 0.1,"calcMethod": 1,"owner": {},"parties": {"primaryInsured": {"smokingStatus": "N","insuredSex": "M","insuredId": "INSURED_NAME","insuredAge": 20,"birthDate": "01/01/1980","countryOfBirth": "Singapore"}},"policyOptions": {"currency": "SGD","termOptions": {"duration": 29},"retirementAge": 65},"premiumOptions": {"premiumFrequency": "A","premiumTerm":10},"otherOptions": {}},"riders": [{"productId": "WOLHEAL_1","productVersion": "1","sumInsured": 500000,"initialPremium": 1000,"planType": "Plan 2"}]}
+premiumCals = PremiumCalculator().calculate(proposal)
+datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+print(premiumCals)
+
+proposal1 = {"baseCoverage": {"policyStartDate": "05/01/1999","productId": "WOL","productVersion": "1","sumInsured": 700000,"initialPremium": 20000,"discount": 0.1,"calcMethod": 1,"owner": {},"parties": {"primaryInsured": {"smokingStatus": "N","insuredSex": "M","insuredId": "INSURED_NAME","insuredAge": 20,"birthDate": "01/01/1980","countryOfBirth": "Singapore"}},"policyOptions": {"currency": "SGD","termOptions": {"duration": 29},"retirementAge": 65},"premiumOptions": {"premiumFrequency": "A","premiumTerm":10},"otherOptions": {}},"riders": [{"productId": "WOLHEAL_1","productVersion": "1","sumInsured": 500000,"initialPremium": 1000,"planType": "Plan 2"}]}
+premiumCals = PremiumCalculator().calculate(proposal1)
+datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+print(premiumCals)
+
+    </py-script>
+  </body>
+</html>
